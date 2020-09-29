@@ -33,7 +33,7 @@ public class MoveLogsWebServices {
             String year = date.substring(0, 4);
             int month = Integer.parseInt(date.substring(5, 7));
             String servicio = "";
-            String servidor = "Producción";// Producción
+            String servidor = "Desarrollo";// Producción
 
             /*
              * ******************************************************************
@@ -237,6 +237,25 @@ public class MoveLogsWebServices {
              ********************************************************************
              */
             servicio = "Remesas";
+            dir = new File("C:\\WebServicesJava\\" + servidor + "\\" + servicio + "\\Xml");
+            logs = dir.listFiles();
+
+            for (File log : logs) {
+                if (log.getName().contains(date)) {
+                    moveFile(year, month, servicio, log.getName(), servidor);
+                } else {
+                      System.out.println(servicio +" Archivo no cumple con fecha");
+                }
+            }
+            System.out.println("LOGS MOVED IN SERVICE " + servicio);
+            
+            
+            /*
+             * ******************************************************************
+             * MOVER LOGS DEL SERVICIO DE ACH  
+             ********************************************************************
+             */
+            servicio = "ACH";
             dir = new File("C:\\WebServicesJava\\" + servidor + "\\" + servicio + "\\Xml");
             logs = dir.listFiles();
 
